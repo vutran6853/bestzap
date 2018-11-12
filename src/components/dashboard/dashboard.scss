@@ -1,0 +1,14 @@
+$boxborder: 1px solid red;
+$boxpborder: 1px solid blue;
+
+
+
+.box {
+  border: $boxborder;
+  height: 500px;
+  width: 500px;
+
+  p {
+    border: $boxpborder;
+  }
+}
