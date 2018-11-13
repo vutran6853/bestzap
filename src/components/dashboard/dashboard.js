@@ -15,6 +15,7 @@ class Dashboard extends Component {
       categoriesList: [],
       userInputTerm: '',
       userInputLocation: '',
+      lists: [],
      };
 
      this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
@@ -44,26 +45,50 @@ class Dashboard extends Component {
   //  .catch((error) => {
   //    console.log(`Danger! ${ error }`)
   //  });
-    console.log(this.state);
     let { userInputTerm, userInputLocation } = this.state;
     
     this.props.getLists({term: userInputTerm, location: userInputLocation})
     .then((response) => {
-      console.log(response)
+      // console.log(response.value.data)
+      this.setState({ lists: response.value.data.businesses })
     })
+   .catch((error) => {
+     console.log(`Danger! ${ error }`)
+   });
 
   }
 
   render() {
-    let { categories  } = this.state.categoriesList
-    console.log('categories:', categories);
+    let { lists } = this.state
+    console.log('lists:::', lists);
+   
+      let displayLists = lists.map((value, index) => {
+        console.log(value, index)
+        return(
+          <div key={ value.id } className='listsBox'>
+            <p>Name: { value.name }</p>
+            <p>Phone: { value.phone }</p>
+            <p>Rating: { value.rating }</p>
+            <img src={ value.image_url } alt='broken' className='imgBox'></img>
+            <p>{ value.transactions[0] }</p>
+          </div>
+        )
+      })
+  
     
+
     return (
       <div>
         
         <input placeholder='pizza, spas, burgers' onChange={ (e) => this.handleUserInputTerm(e.target.value) } ></input>
         <input placeholder='Place /City' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></input>
         <button onClick={ () => this.handleSubmitUserInput() } >Seach</button>
+
+        <div>
+          { displayLists }
+        </div>
+      
+      
       </div>
     );
   }

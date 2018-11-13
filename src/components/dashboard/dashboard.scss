@@ -3,12 +3,18 @@ $boxpborder: 1px solid blue;
 
 
 
-.box {
+.listsBox {
   border: $boxborder;
-  height: 500px;
-  width: 500px;
+  height: 250px;
+  width: 250px;
+  float: left;
 
-  p {
-    border: $boxpborder;
+  // p {
+  //   border: $boxpborder;
+  // }
+
+  .imgBox {
+    height: 100px;
+    width: 100px;
   }
 }
