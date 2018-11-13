@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { getCategoriesList, getSelectCategoriesList } from '../../duck/categoriesListReducer';
+import { getCategoriesList, getSelectCategoriesList, getLists } from '../../duck/categoriesListReducer';
 import { stringify } from 'querystring';
 import css from './dashboard.scss'
 import { Link } from 'react-router-dom';
@@ -11,96 +10,60 @@ import RestaurantMoreInfo from '../restaurantMoreInfo/restaurantMoreInfo';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+
     this.state = { 
       categoriesList: [],
-      selectCategoriesID: '',
-      restaurantsList: [],
-      restaurantsID: '',
+      userInputTerm: '',
+      userInputLocation: '',
      };
 
-     this.handleSelectCategories = this.handleSelectCategories.bind(this);
-     this.handleGetSelectCategories = this.handleGetSelectCategories.bind(this);
-     this.handleGetMoreInfo = this.handleGetMoreInfo.bind(this);
-
+     this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
+     this.handleUserInputLocation = this.handleUserInputLocation.bind(this);
   }
 
   componentDidMount() {
-    this.props.getCategoriesList()
+   
+  }
+
+  handleUserInputTerm(value) {
+    // console.log(`value: ${ value }`);
+    this.setState({userInputTerm: value});
+  }
+
+  handleUserInputLocation(value) {
+    this.setState({ userInputLocation: value })
+  }
+
+  ////  get categories by user input 
+  handleSubmitUserInput() {
+  //   this.props.getCategoriesList(this.state.userInputTerm)
+  //  .then((response) => {
+  //    console.log(response.value.data)
+  //   this.setState({ categoriesList: response.value.data })
+  //  })
+  //  .catch((error) => {
+  //    console.log(`Danger! ${ error }`)
+  //  });
+    console.log(this.state);
+    let { userInputTerm, userInputLocation } = this.state;
+    
+    this.props.getLists({term: userInputTerm, location: userInputLocation})
     .then((response) => {
-      // console.log(response.value.data.categories)
-      this.setState({ categoriesList: response.value.data.categories })
+      console.log(response)
     })
-    .catch((error) => {
-      console.log(`Danger! ${ error }`)
-    });
-  }
-
-  handleSelectCategories(value) {
-    // console.log(`e: ${ value }`);
-    this.setState({ selectCategoriesID: value })
-  }
-
-  handleGetSelectCategories() {
-    // console.log(`selectCategoriesID ${ this.state.selectCategoriesID }`);
-    this.props.getSelectCategoriesList(this.state.selectCategoriesID)
-    .then((response) => {
-      // console.log(response.value.data.restaurants)
-      this.setState({ restaurantsList: response.value.data.restaurants })
-    })
-    .catch((error) => {
-      console.log(`Danger! ${ error }`)
-    });
-  }
-
-  handleGetMoreInfo(value) {
-    console.log(`value:: ${ value }`);
-    this.setState({ restaurantsID: value })
 
   }
-
-
 
   render() {
-    let { categoriesList, restaurantsList } = this.state;
-    // console.log(restaurantsList);
-
-    let displayCategoriesList = categoriesList.map((value, index) => {
-      // console.log(value.categories.name, index)
-      return(
-            <option key={ value.categories.id } value={ value.categories.id } >
-              { value.categories.name }
-            </option>
-      )
-    });
-
-    let displayRestaurantsList = restaurantsList.map((value, index) => {
-      console.log(value.restaurant, index)
-      return(
-        <div className='box'>
-          <Link to={`/restaurant/${ value.restaurant.id }`}>
-            <p onClick={ () => this.handleGetMoreInfo(value.restaurant.id) }>Name: { value.restaurant.name }</p>
-          </Link>
-          <p>Cuisines: { value.restaurant.cuisines }</p>
-          <img src={ value.restaurant.featured_image } style={{ height: 100, width: 100 }} alt='broken'></img>
-          <p>user rating: { value.restaurant.user_rating.aggregate_rating }</p>
-          <a href={ value.restaurant.photos_url } >value.restaurant.photos_url</a>
-          <a href={ value.restaurant.events_url }></a>
-        </div>
-      )
-    });
-
+    let { categories  } = this.state.categoriesList
+    console.log('categories:', categories);
+    
     return (
       <div>
-        <p>Categories: </p>
-        <select onChange={ (e) => this.handleSelectCategories(e.target.value) }>
-          { displayCategoriesList }
-        </select>
-        <button onClick={ () => this.handleGetSelectCategories() }>Submit</button>
-
-       <div>
-         { displayRestaurantsList }
-
-       </div>
+        
+        <input placeholder='pizza, spas, burgers' onChange={ (e) => this.handleUserInputTerm(e.target.value) } ></input>
+        <input placeholder='Place /City' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></input>
+        <button onClick={ () => this.handleSubmitUserInput() } >Seach</button>
       </div>
     );
   }
@@ -112,5 +75,5 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { getCategoriesList, getSelectCategoriesList })(Dashboard);
+export default connect(mapStateToProps, {  getCategoriesList, getLists })(Dashboard);
 

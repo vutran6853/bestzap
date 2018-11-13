@@ -3,7 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Route from './route';
 import store from './duck/store';
-
+import NavBar from './components/navbar/navbar';
 
 class App extends Component {
   render() {
@@ -11,6 +11,7 @@ class App extends Component {
       <Provider store={ store }>
         <HashRouter>
           <div className="App">
+            <NavBar/>
             { Route }
           </div>
         </HashRouter>

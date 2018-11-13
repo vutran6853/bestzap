@@ -1,55 +1,51 @@
 import axios from 'axios';
-axios.defaults.headers.common['user-key'] = `${ process.env.REACT_APP_USER_KEY }`;
 
 ////  Inital Value
 const GET_CATEGORIES = 'GET_CATEGORIES';
-const SELECT_CATEGORIES = 'SELECT_CATEGORIES';
+const GET_LISTS = 'GET_LISTS'
 
 
 ////  Initial State
 let initialState = {
   categoriesList: [],
-  selectCategoriesID: '',
-  selectCategories: [],
-  restaurantInfo: [],
+  lists: [],
 }
 
-export function getCategoriesList() {
+export function getCategoriesList(userInput) {
+  console.log(`userInput: ${ userInput }`);
   return {
     type: GET_CATEGORIES,
-    payload: axios.get(`https://developers.zomato.com/api/v2.1/categories`)
+    payload: axios.get(`/api/getCategories/${ userInput }`)
   }
 }
 
-export function getSelectCategoriesList(id) {
-  console.log(`ID::: ${ id }`);
+export function getLists(userInput) {
+  console.log(`userInputTerm: ${ userInput.term }`);
+  console.log(`userInputLocation: ${ userInput.location }`);
   return {
-    type: SELECT_CATEGORIES,
-    payload: axios.get(`https://developers.zomato.com/api/v2.1/search?category=${ id }`)
+    type: GET_LISTS,
+    payload: axios.post(`/api/getList`, { userInput })
   }
 }
+
+
+
 
 ////  Handle State Changes
 export default function categoriesListReducer(state = initialState, action) {
   switch(action.type) {
     case `${ GET_CATEGORIES }_FULFILLED`:
-    // console.log(`${ GET_CATEGORIES }_FULFILLED`, action.payload.data.categories)
-   
+    console.log(`${ GET_CATEGORIES }_FULFILLED`, action.payload)
     return {
       ...state,
-      categoriesList: action.payload.data.categories
+      categoriesList: action.payload
     }
-
-    case `${ SELECT_CATEGORIES }_FULFILLED`:
+    case `${ GET_LISTS }_FULFILLED`:
     return {
       ...state,
-      selectCategories: action.payload.data
+      lists: action.payload
     }
-
-
     default:
     return state;
   }
 }
-
-console.log(`state: ${ initialState.categoriesList }`);
