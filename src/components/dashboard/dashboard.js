@@ -4,7 +4,7 @@ import { getCategoriesList, getSelectCategoriesList, getLists } from '../../duck
 import { stringify } from 'querystring';
 import css from './dashboard.scss'
 import { Link } from 'react-router-dom';
-import RestaurantMoreInfo from '../restaurantMoreInfo/restaurantMoreInfo';
+import PlaceMoreInfo from '../placeMoreInfo/placeMoreInfo';
 
 
 class Dashboard extends Component {
@@ -34,6 +34,7 @@ class Dashboard extends Component {
   handleUserInputLocation(value) {
     this.setState({ userInputLocation: value })
   }
+  
 
   ////  get categories by user input 
   handleSubmitUserInput() {
@@ -66,7 +67,9 @@ class Dashboard extends Component {
         console.log(value, index)
         return(
           <div key={ value.id } className='listsBox'>
-            <p>Name: { value.name }</p>
+            <Link to={ `/placeMoreInfo/${ value.id }` }>
+              <p>Name: { value.name }</p>
+            </Link>
             <p>Phone: { value.phone }</p>
             <p>Rating: { value.rating }</p>
             <img src={ value.image_url } alt='broken' className='imgBox'></img>
