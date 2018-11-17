@@ -4,8 +4,8 @@ import { getCategoriesList, getSelectCategoriesList, getLists } from '../../duck
 import { stringify } from 'querystring';
 import css from './dashboard.scss'
 import { Link } from 'react-router-dom';
-import PlaceMoreInfo from '../placeMoreInfo/placeMoreInfo';
-
+import PlaceMoreInfo from '../placeMoreInfo/PlaceMoreInfo';
+import MapContainer from '../googleMap/MapContainer';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -61,10 +61,9 @@ class Dashboard extends Component {
 
   render() {
     let { lists } = this.state
-    console.log('lists:::', lists);
    
       let displayLists = lists.map((value, index) => {
-        console.log(value, index)
+        // console.log(value, index)
         return(
           <div key={ value.id } className='listsBox'>
             <Link to={ `/placeMoreInfo/${ value.id }` }>
@@ -74,6 +73,7 @@ class Dashboard extends Component {
             <p>Rating: { value.rating }</p>
             <img src={ value.image_url } alt='broken' className='imgBox'></img>
             <p>{ value.transactions[0] }</p>
+            <MapContainer data={ value }/>
           </div>
         )
       })
@@ -90,7 +90,7 @@ class Dashboard extends Component {
         <div>
           { displayLists }
         </div>
-      
+        
       
       </div>
     );

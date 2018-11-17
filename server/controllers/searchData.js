@@ -33,9 +33,23 @@ let getListItems = (req, res, next) => {
 }
 
 let getPlaceInfo = (req, res, next) => {
-  console.log(req.params);
+  // console.log(req.params);
   let { id } = req.params
   axios.get(`https://api.yelp.com/v3/businesses/${ id }`)
+  .then((response) => {
+    // console.log(response.data)
+    res.status(200).send(response.data)
+  })
+  .catch((error) => {
+    res.status(500).send('Oop, Something have Happen unable to complete this request', error)
+    // console.log(error);
+  });
+}
+
+let getPlaceReviews = (req, res, next) => {
+  // console.log('req.params::', req.params);
+  let { id } = req.params
+  axios.get(`https://api.yelp.com/v3/businesses/${ id }/reviews`)
   .then((response) => {
     // console.log(response.data)
     res.status(200).send(response.data)
@@ -52,4 +66,5 @@ module.exports = {
   getCategories,
   getListItems,
   getPlaceInfo,
+  getPlaceReviews,
 }

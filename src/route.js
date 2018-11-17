@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from './components/dashboard/dashboard';
-import PlaceMoreInfo from './components/placeMoreInfo/placeMoreInfo';
+import Dashboard from './components/dashboard/Dashboard';
+import PlaceMoreInfo from './components/placeMoreInfo/PlaceMoreInfo';
 
 
 export default(

@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const GET_LISTS = 'GET_LISTS'
 const GET_PLACEINFO = 'GET_PLACEINFO'
+const GET_PLACEREVIEWS = 'GET_PLACEREVIEWS'
 
 
 ////  Initial State
@@ -11,8 +12,11 @@ let initialState = {
   categoriesList: [],
   lists: [],
   placeInfo: [],
+  placeReviews: [],
 }
 
+
+////  Action Creator
 export function getCategoriesList(userInput) {
   // console.log(`userInput: ${ userInput }`);
   return {
@@ -38,6 +42,13 @@ export function getPlaceInfo(id) {
   }
 }
 
+export function getPlaceReviews(id) {
+    console.log(`id ${ id }`);
+  return {
+    type: GET_PLACEREVIEWS,
+    payload: axios.get(`/api/getPlaceReviews/${ id }/reviews`)
+  }
+}
 
 
 

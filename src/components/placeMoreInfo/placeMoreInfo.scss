@@ -1,0 +1,18 @@
+$imgheight: 150px;
+$imgwidth: 150px;
+$boxborder: 1px solid red;
+$boxpborder: 1px solid blue;
+
+
+.placeInfoBox {
+  border: $boxpborder;
+}
+
+.imgBox1 {
+  height: $imgheight;
+  width: $imgwidth;
+  border: 1px solid blue;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
