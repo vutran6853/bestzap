@@ -15,7 +15,6 @@ let initialState = {
   placeReviews: [],
 }
 
-
 ////  Action Creator
 export function getCategoriesList(userInput) {
   // console.log(`userInput: ${ userInput }`);
@@ -34,6 +33,7 @@ export function getLists(userInput) {
   }
 }
 
+
 export function getPlaceInfo(id) {
   // console.log(`id ${ id }`);
   return {
@@ -43,7 +43,7 @@ export function getPlaceInfo(id) {
 }
 
 export function getPlaceReviews(id) {
-    console.log(`id ${ id }`);
+    // console.log(`id ${ id }`);
   return {
     type: GET_PLACEREVIEWS,
     payload: axios.get(`/api/getPlaceReviews/${ id }/reviews`)

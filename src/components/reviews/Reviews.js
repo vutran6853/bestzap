@@ -7,7 +7,6 @@ class Reviews extends Component {
     this.state = {
       reviews: [],
     }
-
   }
   componentDidMount() {
     setTimeout(() => {

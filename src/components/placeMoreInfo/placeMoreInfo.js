@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPlaceInfo, getPlaceReviews } from '../../duck/categoriesListReducer';
 import Reviews from '../reviews/Reviews';
-import MapContainer from '../googleMap/MapContainer';
+import SingleMapContainer from '../googleMap/SingleMapContainer';
 
 import css from './placeMoreInfo.scss'
 
@@ -84,7 +84,7 @@ class PlaceMoreInfo extends Component {
         <p>Rate: { placeInfo.rating }</p>
         <p>Location: { placeAddress[0]} {placeAddress[1]}</p>
         <Reviews data={ this.state.placeReviews }/>
-        <MapContainer data={ this.state.placeInfo }/>
+        <SingleMapContainer data={ this.state.placeInfo }/>
       </div>
     );
   }

@@ -5,7 +5,9 @@ import { stringify } from 'querystring';
 import css from './dashboard.scss'
 import { Link } from 'react-router-dom';
 import PlaceMoreInfo from '../placeMoreInfo/PlaceMoreInfo';
-import MapContainer from '../googleMap/MapContainer';
+import SingleMapContainer from '../googleMap/SingleMapContainer';
+import ResultDashboard from './ResultDashboard';
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -20,10 +22,8 @@ class Dashboard extends Component {
 
      this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
      this.handleUserInputLocation = this.handleUserInputLocation.bind(this);
-  }
-
-  componentDidMount() {
-   
+    //  this.handleDisplayMainMap = this.handleDisplayMainMap.bind(this);
+    this.handleRouteResultDashboard = this.handleRouteResultDashboard.bind(this);
   }
 
   handleUserInputTerm(value) {
@@ -38,26 +38,27 @@ class Dashboard extends Component {
 
   ////  get categories by user input 
   handleSubmitUserInput() {
-  //   this.props.getCategoriesList(this.state.userInputTerm)
-  //  .then((response) => {
-  //    console.log(response.value.data)
-  //   this.setState({ categoriesList: response.value.data })
-  //  })
-  //  .catch((error) => {
-  //    console.log(`Danger! ${ error }`)
-  //  });
     let { userInputTerm, userInputLocation } = this.state;
     
     this.props.getLists({term: userInputTerm, location: userInputLocation})
     .then((response) => {
       // console.log(response.value.data)
       this.setState({ lists: response.value.data.businesses })
+      this.props.history.push('/resultDashboard')
     })
    .catch((error) => {
      console.log(`Danger! ${ error }`)
    });
-
   }
+
+  handleRouteResultDashboard() {
+    setTimeout(() => {
+      console.log('hit');
+    
+    }, 3000)
+ 
+  }
+
 
   render() {
     let { lists } = this.state
@@ -73,24 +74,26 @@ class Dashboard extends Component {
             <p>Rating: { value.rating }</p>
             <img src={ value.image_url } alt='broken' className='imgBox'></img>
             <p>{ value.transactions[0] }</p>
-            <MapContainer data={ value }/>
+           
           </div>
         )
-      })
-  
-    
+      });
+
 
     return (
       <div>
         
         <input placeholder='pizza, spas, burgers' onChange={ (e) => this.handleUserInputTerm(e.target.value) } ></input>
         <input placeholder='Place /City' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></input>
-        <button onClick={ () => this.handleSubmitUserInput() } >Seach</button>
+
+        <button onClick={ () => { this.handleSubmitUserInput() } } >Seach
+        </button>
 
         <div>
           { displayLists }
+          
         </div>
-        
+
       
       </div>
     );
