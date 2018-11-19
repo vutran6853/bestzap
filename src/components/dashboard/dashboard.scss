@@ -1,13 +1,14 @@
 $boxborder: 1px solid red;
 $boxpborder: 1px solid blue;
-
-
+$mapboxborder: 1px solid blue; 
+$pfont: 10px;
 
 .listsBox {
   border: $boxborder;
   height: 250px;
   width: 250px;
-  float: left;
+  display: inline-table;
+  // float: left;
 
   // p {
   //   border: $boxpborder;
@@ -17,4 +18,15 @@ $boxpborder: 1px solid blue;
     height: 100px;
     width: 100px;
   }
+}
+
+.mapBox {
+  border: $mapboxborder;
+  height: 500px;
+  width: 600px;
+}
+
+.map_h3_font {
+  font-size: $pfont;
+  font-family: 'Courier New', Courier, monospace;
 }

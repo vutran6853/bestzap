@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import MainDashboardMap from './mainDashboardMap';
-
+// import MainDashboardMap from './mainDashboardMap';
+import MultMapContainer from '../googleMap/MultMapContainer';
 class ResultDashboard extends Component {
   constructor(props) {
     super(props);
@@ -10,11 +10,16 @@ class ResultDashboard extends Component {
     //// local state if needed
     this.state = {
       lists: [],
+      businessesData: [],
+      region: [],
     }
   }
   componentDidMount() {
-    console.log(this.props.categoriesList.lists.data.businesses);
+    console.log(this.props.categoriesList.lists.data);
     this.setState({ lists: this.props.categoriesList.lists.data.businesses })
+    this.setState({ businessesData: this.props.categoriesList.lists.data.businesses })
+    this.setState({ region: this.props.categoriesList.lists.data.region })
+
   }
   render() {
     let { lists } = this.state
@@ -38,12 +43,18 @@ class ResultDashboard extends Component {
     return (
       <div>
         <p>ResultDashboard</p>
-
-           <div>
           { displayLists }
-          <MainDashboardMap/>
-        </div>
+           <div >
+           
 
+          </div>
+
+          <div className='mapBox' >
+
+         
+          <MultMapContainer data={ this.state.businessesData } region={ this.state.region } />
+
+          </div>
       </div>
     );
   }

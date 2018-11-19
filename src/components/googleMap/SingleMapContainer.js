@@ -99,8 +99,8 @@ class MapContainer extends Component {
 
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
            
-              <h1>{ placeName }</h1>
-              <h1>{ placeAddress[0]  } { placeAddress[1]  } </h1>
+              <h3>{ placeName }</h3>
+              <h3>{ placeAddress[0]  } { placeAddress[1]  } </h3>
           </InfoWindow>
       </Map>
     );
