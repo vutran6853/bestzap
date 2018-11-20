@@ -83,7 +83,7 @@ class PlaceMoreInfo extends Component {
         <p>Price: { placeInfo.price }</p>
         <p>Rate: { placeInfo.rating }</p>
         <p>Location: { placeAddress[0]} {placeAddress[1]}</p>
-        <Reviews data={ this.state.placeReviews }/>
+        <Reviews data={ this.state.placeReviews } placeInfo={ placeInfo }/>
         <SingleMapContainer data={ this.state.placeInfo }/>
       </div>
     );

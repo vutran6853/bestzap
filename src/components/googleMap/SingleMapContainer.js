@@ -75,8 +75,8 @@ class MapContainer extends Component {
 
 
  render() {
-  console.log("this.props::", this.props);
-  console.log("this.state::", this.state);
+  // console.log("this.props::", this.props);
+  // console.log("this.state::", this.state);
  
   let { coordinates, placeName, placeAddress } = this.state;
 
