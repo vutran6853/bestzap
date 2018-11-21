@@ -20,6 +20,28 @@ let postInitReview = (req, res, next) => {
   }
 }
 
+let postUserReview = (req, res, next) => {
+  // console.log(req.body);
+  let datePost = ''
+  let dbInstance = req.app.get('db');
+
+  dbInstance.post_user_review(req.body.placeID, req.body.rate, req.body.text, datePost)
+  .then((response) => {
+    // console.log(response)
+    res.status(200).send(response)
+  })
+  .catch((error) => {
+    res.status(500).send('Oop, Something have Happen unable to complete this request')
+    // console.log(error);  
+  });
+}
+
+let getPlaceReview = (req, res, next) => {
+  console.log(req.params);
+}
+
 module.exports = {
   postInitReview,
+  postUserReview,
+  getPlaceReview,
 }

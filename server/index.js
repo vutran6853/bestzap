@@ -7,7 +7,7 @@ const port = process.env.SERVER_PORT || 3002;
 const app = express();
 
 const { getCategories, getListItems, getPlaceInfo, getPlaceReviews } = require('./controllers/searchData');
-const { postInitReview } = require('./controllers/review');
+const { postInitReview, postUserReview, getPlaceReview } = require('./controllers/review');
 
 app.use(cors());
 app.use(json());
@@ -21,15 +21,16 @@ massive(process.env.CONNECTION_STRING)
 .catch(error => console.log('DANGER! : ', error));
 
 
-//// Endpoint
+//// Yelp API Endpoint
 app.get('/api/getCategories/:userInput', getCategories)
 app.post('/api/getList', getListItems)
 app.get('/api/getPlaceInfo/:id', getPlaceInfo)
 app.get('/api/getPlaceReviews/:id/reviews', getPlaceReviews)
 
-////  Post reviews Endpoint
+////  Reviews Endpoint
 app.post('/api/postInitReview', postInitReview)
-
+app.post('/api/postUserReview', postUserReview)
+app.get('/api/placeReview/:id', getPlaceReview)
 
 app.listen(port, () => {
   console.log(`Server is UP and listen to port: ${ port }`)
