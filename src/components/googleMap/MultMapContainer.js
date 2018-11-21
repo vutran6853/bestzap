@@ -23,7 +23,6 @@ class MultMapContainer extends Component {
   }
 
   componentDidMount() {
-    // console.log('this.props...:', this.props)
     this.setState({ coordinates: this.props.data.map((value, index) => {
       // console.log(value, index) 
       return value.coordinates})
@@ -59,8 +58,7 @@ class MultMapContainer extends Component {
 
   handleDisplayMarker() {
     let { coordinates, placeName, placeAddress } = this.state;
-    // console.log('props:', this.props);
-      
+
     return coordinates.map((value, index) => {
       // console.log(value, index)
       // console.log(this.props.data[index].id);
@@ -77,21 +75,19 @@ class MultMapContainer extends Component {
 
   handleDisplayInfo() {
     let { placeAddress, placeName, activeMarker } = this.state;
-    console.log('activeMarker', activeMarker);
-    console.log('placeAddress', placeAddress);
-    console.log('placeName', placeName);
-    console.log('this.props...:', this.props)
+    // console.log('activeMarker', activeMarker);
+    // console.log('placeAddress', placeAddress);
+    // console.log('placeName', placeName);
+    // console.log('this.props...:', this.props)
 
     if(activeMarker === null) {
 
     } else {
       return( 
-      
-      <InfoWindow marker={ this.state.activeMarker } visible={ this.state.showingInfoWindow }>
-               <a href={ `#/placeMoreInfo/${ activeMarker.id }` }>
-               <h3 className='map_h3_font'>{ activeMarker.name }</h3>
-
-               </a>
+              <InfoWindow marker={ this.state.activeMarker } visible={ this.state.showingInfoWindow }>
+                <a href={ `#/placeMoreInfo/${ activeMarker.id }` }>
+                  <h3 className='map_h3_font'>{ activeMarker.name }</h3>
+                </a>
                 <h3 className='map_h3_font'>{ activeMarker.location  }</h3>
               </InfoWindow>
             )
@@ -99,8 +95,6 @@ class MultMapContainer extends Component {
   }
 
   render() {
-    // console.log("this.props::", this.props);
-    // console.log("this.state::", this.state);
     let { placeName, placeAddress, activeMarker, centerRegion } = this.state;
 
     return (
@@ -111,13 +105,8 @@ class MultMapContainer extends Component {
                 onClick={ () => this.handeleOnMapClicked() } 
           >
             { this.handleDisplayMarker() }
-            {/* <Link to='#' > */}
-            {/* <div> */}
+
             { this.handleDisplayInfo() }
-
-            {/* </div> */}
-
-            {/* </Link> */}
           </Map>
     );
   }

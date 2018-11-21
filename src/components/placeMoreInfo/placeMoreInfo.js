@@ -23,7 +23,6 @@ class PlaceMoreInfo extends Component {
   componentDidMount() {
     this.props.getPlaceInfo(this.props.match.params.id)
     .then((response) => {
-      // console.log(response.value.data)
       this.setState({ placeInfo: response.value.data })
     })
    .catch((error) => {
@@ -32,7 +31,6 @@ class PlaceMoreInfo extends Component {
 
    this.props.getPlaceReviews(this.props.match.params.id)
    .then((response) => {
-    //  console.log(response.value.data)
      this.setState({ placeReviews: response.value.data })
     })
    .catch((error) => {
@@ -63,12 +61,10 @@ class PlaceMoreInfo extends Component {
     this.setState({ placeAddress: address })
   }
 
-
-
   render() {
     // console.log('this.props', this.props.match.params.id);
     let { placeInfo, photosList, placeAddress } = this.state
-    // console.log(`placeInfo`, placeInfo);
+
     let displayphotosList = photosList.map((value, index) => {
       return(
         <img key={value.id} src={ value } alt='broken' className='imgBox1'></img>

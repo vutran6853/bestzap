@@ -24,19 +24,21 @@ class Reviews extends Component {
     
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('prevState:', prevState);
-    console.log('prevProps:', prevProps);
-    console.log('this.state.reviews:', this.state.reviews);
-      if(prevState.reviews !== this.state.reviews) {
-        // this.props.getPlaceReview('1')
-        console.log(true);
-      } else {
-        console.log(false)
-      }
+  // componentDidUpdate(prevProps, prevState) {
+  //   let { id: placeID } = this.props.placeInfo
+  //   console.log('this.props', this.props.data.reviews);
+  //   console.log('prevState:', prevState.reviews);
+  //   console.log('prevProps:', prevProps.data.reviews);
+  //   console.log('this.state.reviews:', this.state.reviews);
+  //     if(this.state.reviews !== this.props.data.reviews) {
+  //       // this.props.getPlaceReview(placeID)
+  //       console.log(true);
+  //     } else {
+  //       console.log(false)
+  //     }
 
     
-  }
+  // }
 
   //// Post init review to DB from Yelp API
   postInitReview() {
@@ -60,11 +62,13 @@ class Reviews extends Component {
     });
   }
 
-  //// User input and set on local state
+  ////  User input and set on local state
   handleInputReview(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  ////  Submit user new review (postUserReview)
+  ////  then get all review by placeID (getPlaceReview)
   handleSubmitReview() {
     let { text, rate, reviews } = this.state;
     let { id: placeID } = this.props.placeInfo
@@ -72,15 +76,27 @@ class Reviews extends Component {
     this.props.postUserReview(text, rate, placeID)
     .then((response) => {
       // console.log(response)
-      reviews.push({ rating: response.value.data[0].user_review_rate, 
-                     text:  response.value.data[0].user_review_text,
-                     time_created:  response.value.data[0].user_review_time 
-                  }) 
-      console.log(reviews);
+      // reviews.push({ rating: response.value.data[0].user_review_rate, 
+      //                text:  response.value.data[0].user_review_text,
+      //                time_created:  response.value.data[0].user_review_time }) 
+
       this.setState({ text: '' })
       this.setState({ rate: '' })
 
-
+      return response
+    })
+    .then((response) => {
+      this.props.getPlaceReview(placeID)
+      .then((response) => {
+          this.setState({ reviews: response.value.data.map((value, index) => {
+            return { place_id: value.place_id, 
+                     rating: value.user_review_rate, 
+                     text: value.user_review_text, 
+                     time_created: value.user_review_time }
+          }) 
+        });
+       
+      })
     })
     .catch((error) => {
       console.log(`Danger! ${ error }`)
@@ -89,8 +105,7 @@ class Reviews extends Component {
 
   render() {
     let { reviews } = this.state;
-    console.log(this.state);
-
+    console.log('reviews', reviews);
     let displayReviews = reviews.map((value, index) => {
       // console.log(`value`, value, 'index', index)
       return(
@@ -120,3 +135,5 @@ function mapToPropsState(state) {
 }
 
 export default connect(mapToPropsState, { postUserReview, getPlaceReview })(Reviews);
+
+

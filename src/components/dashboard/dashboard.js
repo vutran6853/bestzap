@@ -19,16 +19,13 @@ class Dashboard extends Component {
       userInputLocation: '',
       lists: [],
      };
-
      this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
      this.handleUserInputLocation = this.handleUserInputLocation.bind(this);
-    //  this.handleDisplayMainMap = this.handleDisplayMainMap.bind(this);
-    this.handleRouteResultDashboard = this.handleRouteResultDashboard.bind(this);
+     this.handleRouteResultDashboard = this.handleRouteResultDashboard.bind(this);
   }
 
   handleUserInputTerm(value) {
-    // console.log(`value: ${ value }`);
-    this.setState({userInputTerm: value});
+    this.setState({ userInputTerm: value });
   }
 
   handleUserInputLocation(value) {
@@ -40,23 +37,14 @@ class Dashboard extends Component {
   handleSubmitUserInput() {
     let { userInputTerm, userInputLocation } = this.state;
     
-    this.props.getLists({term: userInputTerm, location: userInputLocation})
+    this.props.getLists({ term: userInputTerm, location: userInputLocation })
     .then((response) => {
-      // console.log(response.value.data)
       this.setState({ lists: response.value.data.businesses })
       this.props.history.push('/resultDashboard')
     })
    .catch((error) => {
      console.log(`Danger! ${ error }`)
    });
-  }
-
-  handleRouteResultDashboard() {
-    setTimeout(() => {
-      console.log('hit');
-    
-    }, 3000)
- 
   }
 
 

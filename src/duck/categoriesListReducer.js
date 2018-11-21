@@ -25,8 +25,6 @@ export function getCategoriesList(userInput) {
 }
 
 export function getLists(userInput) {
-  // console.log(`userInputTerm: ${ userInput.term }`);
-  // console.log(`userInputLocation: ${ userInput.location }`);
   return {
     type: GET_LISTS,
     payload: axios.post(`/api/getList`, { userInput })

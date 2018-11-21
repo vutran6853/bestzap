@@ -14,18 +14,18 @@ let initialState = {
 
 ////  Action Creator
 export function postUserReview(text, rate, placeID) {
-  console.log(`text ${ text }`, `rate ${ rate }`);
-  console.log(`placeID ${ placeID }`);
+  // console.log(`text ${ text }`, `rate ${ rate }`);
   return {
     type: POST_USER_REVIEW,
     payload: axios.post('/api/postUserReview', { text, rate, placeID })
   }
 }
 
-export function getPlaceReview(id) {
+export function getPlaceReview(placeID) {
+    // console.log(`placeID ${ placeID }`);
   return {
     type: GET_PLACE_REVIEW,
-    payload: axios.get(`/api/placeReview/${ id }`)
+    payload: axios.get(`/api/placeReview/${ placeID }`)
   }
 }
 
