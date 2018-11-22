@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Route from './route';
 import store from './duck/store';
 import NavBar from './components/navbar/Navbar';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   render() {

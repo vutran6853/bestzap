@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import MainDashboardMap from './mainDashboardMap';
 import MultMapContainer from '../googleMap/MultMapContainer';
+import { Container, Card, Button, CardImg, Row, Col } from 'reactstrap';
+import css from './dashboard.scss';
+
 class ResultDashboard extends Component {
   constructor(props) {
     super(props);
@@ -12,47 +14,63 @@ class ResultDashboard extends Component {
       lists: [],
       businessesData: [],
       region: [],
+      cardIndex: '',
     }
+    this.handleEnterCard = this.handleEnterCard.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.categoriesList.lists.data);
+    // console.log(this.props.categoriesList.lists.data);
     this.setState({ lists: this.props.categoriesList.lists.data.businesses })
     this.setState({ businessesData: this.props.categoriesList.lists.data.businesses })
     this.setState({ region: this.props.categoriesList.lists.data.region })
 
   }
+
+  handleEnterCard(index) {
+    console.log(`index: ${ index + 1 }`);
+    this.setState({ cardIndex: index + 1 })
+  }
   render() {
     let { lists } = this.state
-  //  console.log(lists);
+  
     let displayLists = lists.map((value, index) => {
       // console.log(value, index)
       return(
-        <div key={ value.id } className='listsBox'>
+        <Card key={ value.id } id='listsBox' onMouseEnter={ () => this.handleEnterCard(index) }>
+          <p>{ index + 1 }</p>
           <Link to={ `/placeMoreInfo/${ value.id }` }>
             <p>Name: { value.name }</p>
           </Link>
           <p>Phone: { value.phone }</p>
           <p>Rating: { value.rating }</p>
-          <img src={ value.image_url } alt='broken' className='imgBox'></img>
+          <CardImg src={ value.image_url } alt='broken' className='imgBox'></CardImg>
           <p>{ value.transactions[0] }</p>
-         
-        </div>
+        </Card>
       )
     });
 
     return (
       <div>
-        <p>ResultDashboard</p>
-          { displayLists }
-           <div >
-           
 
-          </div>
+          <Container className='displayListBox mt-2' >
+            <Row>
+              <Col xs='6'>
+                { displayLists }
+              </Col>
+              <Row className='fixGoogleMapPosition'>
+                <MultMapContainer data={ this.state.businessesData } region={ this.state.region } cardIndex={ this.state.cardIndex } />
+              </Row>
+            </Row>
+            
+           
+         
+              
+
+          </Container>
 
           <div className='mapBox' >
 
          
-          <MultMapContainer data={ this.state.businessesData } region={ this.state.region } />
 
           </div>
       </div>

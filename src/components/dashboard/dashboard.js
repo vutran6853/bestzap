@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCategoriesList, getSelectCategoriesList, getLists } from '../../duck/categoriesListReducer';
-import { stringify } from 'querystring';
+import { getCategoriesList, getLists } from '../../duck/categoriesListReducer';
 import css from './dashboard.scss'
-import { Link } from 'react-router-dom';
-import PlaceMoreInfo from '../placeMoreInfo/PlaceMoreInfo';
-import SingleMapContainer from '../googleMap/SingleMapContainer';
-import ResultDashboard from './ResultDashboard';
-
+import { Input, Button, Row, Col, Container } from 'reactstrap';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,7 +16,6 @@ class Dashboard extends Component {
      };
      this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
      this.handleUserInputLocation = this.handleUserInputLocation.bind(this);
-     this.handleRouteResultDashboard = this.handleRouteResultDashboard.bind(this);
   }
 
   handleUserInputTerm(value) {
@@ -49,40 +43,25 @@ class Dashboard extends Component {
 
 
   render() {
-    let { lists } = this.state
-   
-      let displayLists = lists.map((value, index) => {
-        // console.log(value, index)
-        return(
-          <div key={ value.id } className='listsBox'>
-            <Link to={ `/placeMoreInfo/${ value.id }` }>
-              <p>Name: { value.name }</p>
-            </Link>
-            <p>Phone: { value.phone }</p>
-            <p>Rating: { value.rating }</p>
-            <img src={ value.image_url } alt='broken' className='imgBox'></img>
-            <p>{ value.transactions[0] }</p>
-           
-          </div>
-        )
-      });
-
-
     return (
       <div>
-        
-        <input placeholder='pizza, spas, burgers' onChange={ (e) => this.handleUserInputTerm(e.target.value) } ></input>
-        <input placeholder='Place /City' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></input>
+        <Container className='dashboardBox'>
+          <Row>
+            <Col xs='5'>
+              <Input placeholder='pizza, spas, burgers' size='sm' onChange={ (e) => this.handleUserInputTerm(e.target.value) } ></Input>
+            </Col>
 
-        <button onClick={ () => { this.handleSubmitUserInput() } } >Seach
-        </button>
+            <Col xs='5'>
+              <Input placeholder='Place /City' size='sm' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></Input>
+            </Col>
 
-        <div>
-          { displayLists }
-          
-        </div>
+            <Col xs='2'>
+              <Button outline color='info' size='sm' onClick={ () => { this.handleSubmitUserInput() } } >Seach</Button>
+            </Col>
+          </Row>
+        </Container>
 
-      
+
       </div>
     );
   }

@@ -14,12 +14,15 @@ class MultMapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       centerRegion: {},
-      style: { width: '50%', height: '50%', border: '5px solid blue' }
+      labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'],
+      labelIndex: 0,
+      style: { width: '50%', height: '50%', border: '5px solid blue', position: 'fixed', left: '1038.5' }
     }
     this.handeleOnMarkerClick = this.handeleOnMarkerClick.bind(this);
     this.handeleOnMapClicked = this.handeleOnMapClicked.bind(this);
     this.handleDisplayMarker = this.handleDisplayMarker.bind(this);
     this.handleDisplayInfo = this.handleDisplayInfo.bind(this);
+    this.handleHoverIndex = this.handleHoverIndex.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +50,6 @@ class MultMapContainer extends Component {
   }
 
   handeleOnMapClicked(props) {
-    // console.log(`1::`, this.props);
     if(this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: true, activeMarker: null })
     }
@@ -55,6 +57,11 @@ class MultMapContainer extends Component {
       this.setState({ showingInfoWindow: false, activeMarker: null })
     }  
   };
+
+  handleHoverIndex(index) {
+    console.log(`index:: ${ index } `);
+    return 'markerHover'
+  }
 
   handleDisplayMarker() {
     let { coordinates, placeName, placeAddress } = this.state;
@@ -68,6 +75,9 @@ class MultMapContainer extends Component {
                       location={ placeAddress[index].display_address[0] }
                       position={ { lat: `${ value.latitude }`, lng: `${ value.longitude }` } } 
                       onClick={ this.handeleOnMarkerClick }
+                      label={ this.state.labels[index++ % this.state.labels.length] }
+                      color='yellow'
+                      fontSize='20px'
               />
             )     
     });
@@ -77,8 +87,6 @@ class MultMapContainer extends Component {
     let { placeAddress, placeName, activeMarker } = this.state;
     // console.log('activeMarker', activeMarker);
     // console.log('placeAddress', placeAddress);
-    // console.log('placeName', placeName);
-    // console.log('this.props...:', this.props)
 
     if(activeMarker === null) {
 
@@ -96,18 +104,23 @@ class MultMapContainer extends Component {
 
   render() {
     let { placeName, placeAddress, activeMarker, centerRegion } = this.state;
-
+    console.log(this.props.cardIndex);
     return (
+      <div >
+
           <Map  google={ this.props.google }
-                style={ this.state.style }
+                // style={ this.state.style }
+                // className='stick'
                 center={ { lat: `${ centerRegion.latitude }`, lng: `${ centerRegion.longitude }` } }
-                zoom={ 15 }
+                zoom={ 10 }
                 onClick={ () => this.handeleOnMapClicked() } 
           >
             { this.handleDisplayMarker() }
 
             { this.handleDisplayInfo() }
           </Map>
+          </div>
+      
     );
   }
 }

@@ -1,32 +1,51 @@
-$boxborder: 1px solid red;
-$boxpborder: 1px solid blue;
-$mapboxborder: 1px solid blue; 
-$pfont: 10px;
+@import '../../globalCSS.scss';
 
-.listsBox {
+// $boxborder: 1px solid red;
+// $boxpborder: 1px solid blue;
+// $mapboxborder: 1px solid blue; 
+// $pfont: 10px;
+
+.dashboardBox {
   border: $boxborder;
-  height: 250px;
-  width: 250px;
+  margin: 10px;
+}
+
+.displayListBox{
+  border: $boxborder;
+}
+
+#listsBox {
+  border: $cardBorder;
+  height: 150px;
+  width: 150px;
   display: inline-table;
-  // float: left;
-
-  // p {
-  //   border: $boxpborder;
-  // }
-
+  
   .imgBox {
     height: 100px;
     width: 100px;
   }
+
+}
+
+#listsBox:hover {
+  background-color: black;
+}
+
+.markerHover:hover {
+  background-color: black;
+  color: yellow;
+  border: 5px solid red;
 }
 
 .mapBox {
   border: $mapboxborder;
-  height: 500px;
-  width: 600px;
+  border: 5px solid black;
 }
 
-.map_h3_font {
-  font-size: $pfont;
-  font-family: 'Courier New', Courier, monospace;
+.fixGoogleMapPosition {
+  position: fixed;
+  border: 1px solid yellow;
+  right: 50px;
+  height: 40%;
+  width: 40%;
 }

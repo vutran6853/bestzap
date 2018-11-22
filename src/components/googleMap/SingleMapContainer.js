@@ -39,14 +39,13 @@ class MapContainer extends Component {
   }
 
   handeleOnMarkerClick(props, marker, e) {
-    console.log(`this.props:`, this.props);
-    console.log('marker::', marker);
-    console.log(`props:: ${ props }`);
+    // console.log(`this.props:`, this.props);
+    // console.log('marker::', marker);
+    // console.log(`props:: ${ props }`);
     this.setState({ selectedPlace: this.props, activeMarker: marker, showingInfoWindow: true });
   }
 
   handeleOnMapClicked(props){
-    console.log(`1::`, this.props);
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false, activeMarker: null })
     }
@@ -75,12 +74,7 @@ class MapContainer extends Component {
 
 
  render() {
-  // console.log("this.props::", this.props);
-  // console.log("this.state::", this.state);
- 
   let { coordinates, placeName, placeAddress } = this.state;
-
-    
 
     return (
       <Map  google={ this.props.google }
