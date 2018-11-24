@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getPlaceInfo, getPlaceReviews } from '../../duck/categoriesListReducer';
 import Reviews from '../reviews/Reviews';
 import SingleMapContainer from '../googleMap/SingleMapContainer';
-
+import rateImage from '../image/image';
 import css from './placeMoreInfo.scss'
 
 class PlaceMoreInfo extends Component {
@@ -78,6 +78,7 @@ class PlaceMoreInfo extends Component {
         <p>Phone: { placeInfo.display_phone }</p>
         <p>Price: { placeInfo.price }</p>
         <p>Rate: { placeInfo.rating }</p>
+        <img src={ rateImage(placeInfo.rating) }alt='rateImage'></img>
         <p>Location: { placeAddress[0]} {placeAddress[1]}</p>
         <Reviews data={ this.state.placeReviews } placeInfo={ placeInfo }/>
         <SingleMapContainer data={ this.state.placeInfo }/>

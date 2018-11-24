@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategoriesList, getLists, getRecommendPLace } from '../../duck/categoriesListReducer';
 import css from './dashboard.scss'
-import { Input, Button, Row, Col, Container } from 'reactstrap';
+import { Input, Button, Row, Col, Container, Card, CardImg, 
+        CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+
+
+// import rateStar from '../image/small_1.png';
+import rateImage from '../image/image.js';
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -27,7 +33,7 @@ class Dashboard extends Component {
     this.props.getRecommendPLace('austin')
     .then((response) => {
       // console.log(response.value.data)
-      this.setState({ recommendList: response.value.data.businesses.splice(0, 3) })
+      this.setState({ recommendList: response.value.data.businesses.splice(0, 4) })
     })
     .catch((error) => {
       console.log(`Danger! ${ error }`)
@@ -64,8 +70,8 @@ class Dashboard extends Component {
 
     this.props.getRecommendPLace(name)
     .then((response) => {
-      console.log(response)
-      this.setState({ recommendList: response.value.data.businesses.splice(0, 3) })
+      // console.log(response)
+      this.setState({ recommendList: response.value.data.businesses.splice(0, 4) })
     });
   }
   
@@ -110,25 +116,41 @@ class Dashboard extends Component {
     }
   }
 
+  keyPress(e) {
+    console.log(e);
+    console.log(e.keyCode);
+    console.log(e.keyCode === 13);
+  } 
+
 
   render() {
     let { recommendList, categoriesList, recommendCity } = this.state;
 
-    // let displayRecommendCity = 
+    let displayRecommendCity = recommendCity.map((value, index) => {
+      // console.log(value, index)
+      return(
+        <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } 
+                    name={ value } 
+                    className='m-2 topCity'>{ value }
+        </a>
+      )
+    })
 
     let displayRecommendList = recommendList.map((value, index) => {
       // console.log(value, index)
       return(
-        <div key={ value.id } id='listsBox'>
+  
+          <Card key={ value.id } id='recommendBox'>
           <p>{ index + 1 }</p>
           <Link to={ `/placeMoreInfo/${ value.id }` }>
             <p>Name: { value.name }</p>
           </Link>
           <p>Phone: { value.phone }</p>
           <p>Rating: { value.rating }</p>
-          <img src={ value.image_url } alt='broken' className='imgBox'></img>
+          <img src={ rateImage(value.rating) } alt='rateImage'></img>
+          <CardImg src={ value.image_url } alt='broken'></CardImg >
           <p>{ value.transactions[0] }</p>
-        </div>
+        </Card>  
       )
     })
 
@@ -137,7 +159,7 @@ class Dashboard extends Component {
       return(
         <a href='#' onClick={ (e) => this.handleSelectCategory(e, e.target.name) } 
                     name={ value } 
-                    className='m-2'>{ value }
+                    className='m-2 topCity'>{ value }
         </a>
       )
     })
@@ -151,24 +173,18 @@ class Dashboard extends Component {
             </Col>
 
             <Col xs='5'>
-              <Input placeholder='Place /City' size='sm' onChange={ (e) => this.handleUserInputLocation(e.target.value) }></Input>
+              <Input placeholder='Place /City' size='sm' onChange={ (e) => this.handleUserInputLocation(e.target.value) } onKeyDown={ this.keyPress }  ></Input>
             </Col>
 
             <Col xs='2'>
-              <Button outline color='info' size='sm' onClick={ () => { this.handleSubmitUserInput() } } >Seach</Button>
+              <Button outline color='info' size='sm' onClick={ () => { this.handleSubmitUserInput() } }>Seach</Button>
             </Col>
           </Row>
         </Container>
 
         <div className='text-center' >
           <p>Browse By Top City</p>
-          
-          <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } name='austin' className='m-2'>Austin</a>
-          <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } name='new york' className='m-2'>New York</a>
-          <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } name='chicago' className='m-2'>Chicago</a>
-          <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } name='tampa' className='m-2'>tampa</a>
-          <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } name='altanta' className='m-2'>Altanta</a>
-
+          { displayRecommendCity }
         </div>
         
         <div>

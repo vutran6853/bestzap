@@ -1,5 +1,27 @@
 @import '../../globalCSS.scss';
 
+
+
+.topCity {
+  // border: $boxborder;
+  background-color: $background_color;
+  color: black;
+  font-size: $font_size;
+  font-family: $font_family;
+}
+
+#recommendBox {
+  border: $cardBorder;
+  height: 170px;
+  width: 170px;
+  display: inline-table;
+  margin-left: 100px;
+  margin-right: 40px;
+  margin-top: 5px;
+}
+
+
+
 .dashboardBox {
   border: $boxborder;
   margin: 50px;
@@ -16,12 +38,16 @@
   width: 150px;
   display: inline-table;
   
-  .imgBox {
-    height: 100px;
-    width: 100px;
-  }
+
 
 }
+// .imgBox {
+//   height: 100px;
+//   width: 100px;
+// }
+
+
+
 
 #listsBox:hover {
   background-color: black;
@@ -37,6 +63,7 @@
   border: $mapboxborder;
   border: 5px solid black;
 }
+
 
 .fixGoogleMapPosition {
   position: fixed;

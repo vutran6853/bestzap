@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { postUserReview, getPlaceReview } from '../../duck/userDataReducer';
+import rateImage from '../image/image';
 
 class Reviews extends Component {
   constructor(props) {
@@ -90,6 +91,7 @@ class Reviews extends Component {
         <div key={ value.id }>
           <p>Text: { value.text }</p>
           <p>Rate: { value.rating }</p>
+          <img src={ rateImage(value.rating) }alt='rateImage'></img>
           <p>Date: { value.time_created }</p>
         </div>
       )

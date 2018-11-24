@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MultMapContainer from '../googleMap/MultMapContainer';
 import { Container, Card, Button, CardImg, Row, Col } from 'reactstrap';
+import rateImage from '../image/image';
 import css from './dashboard.scss';
 
 class ResultDashboard extends Component {
@@ -37,6 +38,7 @@ class ResultDashboard extends Component {
           </Link>
           <p>Phone: { value.phone }</p>
           <p>Rating: { value.rating }</p>
+          <img src={ rateImage(value.rating) }alt='rateImage'></img>
           <CardImg src={ value.image_url } alt='broken' className='imgBox'></CardImg>
           <p>{ value.transactions[0] }</p>
         </Card>
