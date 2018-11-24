@@ -5,22 +5,24 @@ const GET_CATEGORIES = 'GET_CATEGORIES'
 const GET_LISTS = 'GET_LISTS'
 const GET_PLACEINFO = 'GET_PLACEINFO'
 const GET_PLACEREVIEWS = 'GET_PLACEREVIEWS'
+const GET_RECOMMENDPLACE = 'GET_RECOMMENDPLACE'
 
 
 ////  Initial State
 let initialState = {
-  categoriesList: [],
+  categoriesList: ['Restaurants', 'Shopping', 'Nightlife', 'Food', 'Coffee & Tea', 'Hotels & Travel', 'Real Estate'],
   lists: [],
   placeInfo: [],
   placeReviews: [],
+  recommendPlace: [],
 }
 
 ////  Action Creator
-export function getCategoriesList(userInput) {
+export function getCategoriesList() {
   // console.log(`userInput: ${ userInput }`);
   return {
     type: GET_CATEGORIES,
-    payload: axios.get(`/api/getCategories/${ userInput }`)
+    payload: initialState.categoriesList
   }
 }
 
@@ -48,6 +50,13 @@ export function getPlaceReviews(id) {
   }
 }
 
+export function getRecommendPLace(location) {
+  return {
+    type: GET_RECOMMENDPLACE,
+    payload: axios.get(`/api/getRecommendPlace/${ location }`)
+  }
+}
+
 
 
 ////  Handle State Changes
@@ -71,6 +80,12 @@ export default function categoriesListReducer(state = initialState, action) {
       ...state,
       placeInfo: action.payload
     }
+
+    case `${ GET_RECOMMENDPLACE }_FULFILLED`:
+    return {
+      ...state,
+      recommendPlace: action.payload
+    } 
 
     default:
     return state;

@@ -22,7 +22,6 @@ class MultMapContainer extends Component {
     this.handeleOnMapClicked = this.handeleOnMapClicked.bind(this);
     this.handleDisplayMarker = this.handleDisplayMarker.bind(this);
     this.handleDisplayInfo = this.handleDisplayInfo.bind(this);
-    this.handleHoverIndex = this.handleHoverIndex.bind(this);
   }
 
   componentDidMount() {
@@ -58,17 +57,13 @@ class MultMapContainer extends Component {
     }  
   };
 
-  handleHoverIndex(index) {
-    console.log(`index:: ${ index } `);
-    return 'markerHover'
-  }
+
 
   handleDisplayMarker() {
     let { coordinates, placeName, placeAddress } = this.state;
-
+    
     return coordinates.map((value, index) => {
       // console.log(value, index)
-      // console.log(this.props.data[index].id);
       return( <Marker title={ placeName[index] }
                       name={ placeName[index] }
                       id={ this.props.data[index].id }
@@ -76,8 +71,6 @@ class MultMapContainer extends Component {
                       position={ { lat: `${ value.latitude }`, lng: `${ value.longitude }` } } 
                       onClick={ this.handeleOnMarkerClick }
                       label={ this.state.labels[index++ % this.state.labels.length] }
-                      color='yellow'
-                      fontSize='20px'
               />
             )     
     });
@@ -104,20 +97,20 @@ class MultMapContainer extends Component {
 
   render() {
     let { placeName, placeAddress, activeMarker, centerRegion } = this.state;
-    console.log(this.props.cardIndex);
+    console.log(this.props.google);
     return (
       <div >
 
           <Map  google={ this.props.google }
-                // style={ this.state.style }
-                // className='stick'
                 center={ { lat: `${ centerRegion.latitude }`, lng: `${ centerRegion.longitude }` } }
                 zoom={ 10 }
                 onClick={ () => this.handeleOnMapClicked() } 
+            
           >
             { this.handleDisplayMarker() }
 
             { this.handleDisplayInfo() }
+            
           </Map>
           </div>
       

@@ -6,7 +6,7 @@ const { json } = require('body-parser');
 const port = process.env.SERVER_PORT || 3002;
 const app = express();
 
-const { getCategories, getListItems, getPlaceInfo, getPlaceReviews } = require('./controllers/searchData');
+const { getCategories, getListItems, getPlaceInfo, getPlaceReviews, getRecommendPlace } = require('./controllers/searchData');
 const { postInitReview, postUserReview, getPlaceReview } = require('./controllers/review');
 
 app.use(cors());
@@ -22,10 +22,11 @@ massive(process.env.CONNECTION_STRING)
 
 
 //// Yelp API Endpoint
-app.get('/api/getCategories/:userInput', getCategories)
+app.get('/api/getCategories/', getCategories)
 app.post('/api/getList', getListItems)
 app.get('/api/getPlaceInfo/:id', getPlaceInfo)
 app.get('/api/getPlaceReviews/:id/reviews', getPlaceReviews)
+app.get('/api/getRecommendPlace/:location', getRecommendPlace)
 
 ////  Reviews Endpoint
 app.post('/api/postInitReview', postInitReview)

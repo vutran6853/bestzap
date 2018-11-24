@@ -14,9 +14,7 @@ class ResultDashboard extends Component {
       lists: [],
       businessesData: [],
       region: [],
-      cardIndex: '',
     }
-    this.handleEnterCard = this.handleEnterCard.bind(this);
   }
   componentDidMount() {
     // console.log(this.props.categoriesList.lists.data);
@@ -26,17 +24,13 @@ class ResultDashboard extends Component {
 
   }
 
-  handleEnterCard(index) {
-    console.log(`index: ${ index + 1 }`);
-    this.setState({ cardIndex: index + 1 })
-  }
   render() {
     let { lists } = this.state
   
     let displayLists = lists.map((value, index) => {
       // console.log(value, index)
       return(
-        <Card key={ value.id } id='listsBox' onMouseEnter={ () => this.handleEnterCard(index) }>
+        <Card key={ value.id } id='listsBox'>
           <p>{ index + 1 }</p>
           <Link to={ `/placeMoreInfo/${ value.id }` }>
             <p>Name: { value.name }</p>
@@ -58,7 +52,7 @@ class ResultDashboard extends Component {
                 { displayLists }
               </Col>
               <Row className='fixGoogleMapPosition'>
-                <MultMapContainer data={ this.state.businessesData } region={ this.state.region } cardIndex={ this.state.cardIndex } />
+                <MultMapContainer data={ this.state.businessesData } region={ this.state.region } />
               </Row>
             </Row>
             

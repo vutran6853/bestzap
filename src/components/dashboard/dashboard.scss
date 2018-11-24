@@ -1,13 +1,9 @@
 @import '../../globalCSS.scss';
 
-// $boxborder: 1px solid red;
-// $boxpborder: 1px solid blue;
-// $mapboxborder: 1px solid blue; 
-// $pfont: 10px;
-
 .dashboardBox {
   border: $boxborder;
-  margin: 10px;
+  margin: 50px;
+  background-color: yellowgreen;
 }
 
 .displayListBox{
