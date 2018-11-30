@@ -20,6 +20,11 @@ massive(process.env.CONNECTION_STRING)
 })
 .catch(error => console.log('DANGER! : ', error));
 
+const path = require('path'); // Usually moved to the start of file
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 //// Yelp API Endpoint
 app.get('/api/getCategories/', getCategories)
