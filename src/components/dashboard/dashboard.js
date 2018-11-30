@@ -27,6 +27,7 @@ class Dashboard extends Component {
      this.handleUserInputTerm = this.handleUserInputTerm.bind(this);
      this.handleUserInputLocation = this.handleUserInputLocation.bind(this);
      this.handleSelectCity = this.handleSelectCity.bind(this);
+     this.keyPress = this.keyPress.bind(this);
   }
 
   componentDidMount() {
@@ -54,15 +55,18 @@ class Dashboard extends Component {
   ////  get categories by user input 
   handleSubmitUserInput() {
     let { userInputTerm, userInputLocation } = this.state;
-    
-    this.props.getLists({ term: userInputTerm, location: userInputLocation })
-    .then((response) => {
-      this.setState({ lists: response.value.data.businesses })
-      this.props.history.push('/resultDashboard')
-    })
-   .catch((error) => {
-     console.log(`Danger! ${ error }`)
-   });
+    if(userInputTerm === '' && userInputLocation === '') {
+      return null
+    } else {
+      this.props.getLists({ term: userInputTerm, location: userInputLocation })
+      .then((response) => {
+        this.setState({ lists: response.value.data.businesses })
+        this.props.history.push('/resultDashboard')
+      })
+     .catch((error) => {
+       console.log(`Danger! ${ error }`)
+     });
+    }
   }
 
   handleSelectCity(e, name) {
@@ -116,10 +120,15 @@ class Dashboard extends Component {
     }
   }
 
+  ////  Shortcut for user to push enter to search
   keyPress(e) {
-    console.log(e);
-    console.log(e.keyCode);
-    console.log(e.keyCode === 13);
+    if(e.which === 13) {
+      this.handleUserInputTerm()
+      this.handleUserInputLocation()
+      this.handleSubmitUserInput()
+    } else {
+      return null
+    }
   } 
 
 
@@ -139,7 +148,6 @@ class Dashboard extends Component {
     let displayRecommendList = recommendList.map((value, index) => {
       // console.log(value, index)
       return(
-  
           <Card key={ value.id } id='recommendBox'>
           <p>{ index + 1 }</p>
           <Link to={ `/placeMoreInfo/${ value.id }` }>
@@ -173,7 +181,7 @@ class Dashboard extends Component {
             </Col>
 
             <Col xs='5'>
-              <Input placeholder='Place /City' size='sm' onChange={ (e) => this.handleUserInputLocation(e.target.value) } onKeyDown={ this.keyPress }  ></Input>
+              <Input placeholder='Place /City' size='sm' onChange={ (e) => this.handleUserInputLocation(e.target.value) }  onKeyPress={ (e) => this.keyPress(e) }  ></Input>
             </Col>
 
             <Col xs='2'>
@@ -184,7 +192,7 @@ class Dashboard extends Component {
 
         <div className='text-center' >
           <p>Browse By Top City</p>
-          { displayRecommendCity }
+            { displayRecommendCity }
         </div>
         
         <div>
@@ -192,11 +200,17 @@ class Dashboard extends Component {
         </div>
 
         <div className='text-center' >
-          <p >Browse Businesses By Category</p>
-          { displayRecommendCategorie }
+          <p>Browse Businesses By Category</p>
+          <div className='OuterRecommendCategorieBox'>
+            { displayRecommendCategorie }
+          </div>
         </div>
 
-
+        <footer>
+          <div className='footerBox'>
+            <h6 className=' text-center'>Copyright © 2018 Made by Vu Tran</h6>
+          </div>
+        </footer>
 
       </div>
     );
@@ -205,7 +219,6 @@ class Dashboard extends Component {
 
 ////  Redux props
 function mapStateToProps(state) {
-  // console.log(`state:: ${ state.categoriesList.selectCategories }`);
   return state
 }
 

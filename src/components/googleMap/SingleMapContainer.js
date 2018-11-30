@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-const style = {
-  width: '50%',
-  height: '50%'
-}
+
 class MapContainer extends Component {
   constructor(props) {
     super(props)
@@ -15,6 +12,7 @@ class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      style: { width: '50%', height: '50%' }
     }
     this.handeleOnMarkerClick = this.handeleOnMarkerClick.bind(this);
     this.handeleOnMapClicked = this.handeleOnMapClicked.bind(this);
@@ -56,46 +54,26 @@ class MapContainer extends Component {
     this.setState({ placeAddress: address })
   }
 
-  // handeleOnMarkerClick = (props, marker, e) =>
-  //   this.setState({
-  //     selectedPlace: this.props.data.name,
-  //     activeMarker: marker,
-  //     showingInfoWindow: true
-  //   });
- 
-  //   handeleOnMapClicked = (props) => {
-  //   if (this.state.showingInfoWindow) {
-  //     this.setState({
-  //       showingInfoWindow: false,
-  //       activeMarker: null
-  //     })
-  //   }
-  // };
-
-
  render() {
   let { coordinates, placeName, placeAddress } = this.state;
 
     return (
       <Map  google={ this.props.google }
-            style={ style }
+            style={ this.state.style }
             center={ { lat: `${ coordinates.latitude }`, lng: `${ coordinates.longitude }` } }
             zoom={ 15 }
             onClick={ () => this.handeleOnMapClicked() } >
 
-      <Marker title={ placeName }
-              name={ placeName }
-              position={ { lat: `${ coordinates.latitude }`, lng: `${ coordinates.longitude }` } } 
-              onClick={ this.handeleOnMarkerClick }
-      />
+        <Marker title={ placeName }
+                name={ placeName }
+                position={ { lat: `${ coordinates.latitude }`, lng: `${ coordinates.longitude }` } } 
+                onClick={ this.handeleOnMarkerClick }
+        />
       
-  
-
-          <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-           
-              <h3>{ placeName }</h3>
-              <h3>{ placeAddress[0]  } { placeAddress[1]  } </h3>
-          </InfoWindow>
+        <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+            <h3>{ placeName }</h3>
+            <h3>{ placeAddress[0]  } { placeAddress[1] }</h3>
+        </InfoWindow>
       </Map>
     );
   }

@@ -10,6 +10,7 @@
   font-family: $font_family;
 }
 
+
 #recommendBox {
   border: $cardBorder;
   height: 170px;
@@ -20,16 +21,25 @@
   margin-top: 5px;
 }
 
-
-
-.dashboardBox {
-  border: $boxborder;
-  margin: 50px;
-  background-color: yellowgreen;
+.OuterRecommendCategorieBox {
+  border: $cardBorder;
+  height: 100px;
+  padding: 10px
 }
 
-.displayListBox{
+.dashboardBox {
+  border: $cardBorder;
+  margin: 50px;
+  // background-color: yellowgreen;
+}
+
+.displayListBox {
   border: $boxborder;
+}
+
+.displayReviewBox {
+  border: $cardBorder;
+  margin-bottom: 5px;
 }
 
 #listsBox {
@@ -37,27 +47,14 @@
   height: 150px;
   width: 150px;
   display: inline-table;
+  margin: 5px;
   
-
-
-}
-// .imgBox {
-//   height: 100px;
-//   width: 100px;
-// }
-
-
-
-
-#listsBox:hover {
-  background-color: black;
 }
 
-.markerHover:hover {
-  background-color: black;
-  color: yellow;
-  border: 5px solid red;
+.placeImgBox {
+  border: 5px solid yellow;
 }
+
 
 .mapBox {
   border: $mapboxborder;
@@ -71,4 +68,9 @@
   right: 50px;
   height: 40%;
   width: 40%;
+}
+
+.footerBox {
+  background-color: lightblue;
+  height: 100px;
 }

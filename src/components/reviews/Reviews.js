@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { postUserReview, getPlaceReview } from '../../duck/userDataReducer';
 import rateImage from '../image/image';
+import { Container,Row, Col } from 'reactstrap';
+
 
 class Reviews extends Component {
   constructor(props) {
@@ -88,12 +90,12 @@ class Reviews extends Component {
     let displayReviews = reviews.map((value, index) => {
       // console.log(`value`, value, 'index', index)
       return(
-        <div key={ value.id }>
+        <Container key={ value.id } className='displayReviewBox'>
           <p>Text: { value.text }</p>
           <p>Rate: { value.rating }</p>
-          <img src={ rateImage(value.rating) }alt='rateImage'></img>
+          <img src={ rateImage(value.rating) } alt='rateImage'></img>
           <p>Date: { value.time_created }</p>
-        </div>
+        </Container>
       )
     });
  
@@ -101,10 +103,14 @@ class Reviews extends Component {
 
     return (
       <div>
-        { displayReviews }
-        <input name='text' onChange={ (e) => this.handleInputReview(e) } placeholder='text' value={this.state.text}></input>
-        <input name='rate' onChange={ (e) => this.handleInputReview(e) } placeholder='Rate' value={this.state.rate}></input>
-        <button onClick={ () => this.handleSubmitReview() }>Submit</button>
+        <div>
+          { displayReviews }
+        </div>
+        <div>
+          <input name='text' onChange={ (e) => this.handleInputReview(e) } placeholder='text' value={this.state.text}></input>
+          <input name='rate' onChange={ (e) => this.handleInputReview(e) } placeholder='Rate' value={this.state.rate}></input>
+          <button onClick={ () => this.handleSubmitReview() }>Submit</button>
+        </div>
       </div>
     );
   }

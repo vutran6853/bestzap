@@ -4,6 +4,7 @@ import { getPlaceInfo, getPlaceReviews } from '../../duck/categoriesListReducer'
 import Reviews from '../reviews/Reviews';
 import SingleMapContainer from '../googleMap/SingleMapContainer';
 import rateImage from '../image/image';
+import { Container, CardImg, Row, Col } from 'reactstrap';
 import css from './placeMoreInfo.scss'
 
 class PlaceMoreInfo extends Component {
@@ -72,8 +73,8 @@ class PlaceMoreInfo extends Component {
     });
 
     return (
-      <div className='placeInfoBox'>
-        <p>Name: { placeInfo.alias }</p>
+      <Container className='placeInfoBox'>
+        <p className=' text-center m-2'>Name: { placeInfo.alias }</p>
           { displayphotosList }
         <p>Phone: { placeInfo.display_phone }</p>
         <p>Price: { placeInfo.price }</p>
@@ -82,7 +83,7 @@ class PlaceMoreInfo extends Component {
         <p>Location: { placeAddress[0]} {placeAddress[1]}</p>
         <Reviews data={ this.state.placeReviews } placeInfo={ placeInfo }/>
         <SingleMapContainer data={ this.state.placeInfo }/>
-      </div>
+      </Container>
     );
   }
 }

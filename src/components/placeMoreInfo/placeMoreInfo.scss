@@ -1,5 +1,5 @@
-$imgheight: 150px;
-$imgwidth: 150px;
+$imgheight: 250px;
+$imgwidth: 250px;
 $boxborder: 1px solid red;
 $boxpborder: 1px solid blue;
 
@@ -11,8 +11,8 @@ $boxpborder: 1px solid blue;
 .imgBox1 {
   height: $imgheight;
   width: $imgwidth;
-  border: 1px solid blue;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 30px;
+  margin-top: 5px;
+  margin-left: 30px;
 }
 

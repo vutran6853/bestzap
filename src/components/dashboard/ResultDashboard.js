@@ -18,11 +18,9 @@ class ResultDashboard extends Component {
     }
   }
   componentDidMount() {
-    // console.log(this.props.categoriesList.lists.data);
     this.setState({ lists: this.props.categoriesList.lists.data.businesses })
     this.setState({ businessesData: this.props.categoriesList.lists.data.businesses })
     this.setState({ region: this.props.categoriesList.lists.data.region })
-
   }
 
   render() {
@@ -38,7 +36,7 @@ class ResultDashboard extends Component {
           </Link>
           <p>Phone: { value.phone }</p>
           <p>Rating: { value.rating }</p>
-          <img src={ rateImage(value.rating) }alt='rateImage'></img>
+          <img src={ rateImage(value.rating) } alt='rateImage'></img>
           <CardImg src={ value.image_url } alt='broken' className='imgBox'></CardImg>
           <p>{ value.transactions[0] }</p>
         </Card>

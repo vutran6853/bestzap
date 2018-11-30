@@ -7,7 +7,7 @@ let getCategories = (req, res, next) => {
   
   axios.get(`https://api.yelp.com/v3/businesses/search?location=austin `)
   .then((response) => {
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).send(response.data)
   })
   .catch((error) => {
