@@ -74,12 +74,12 @@ class PlaceMoreInfo extends Component {
 
     return (
       <Container className='placeInfoBox'>
-        <p className=' text-center m-2'>Name: { placeInfo.alias }</p>
+        <p className='pName'>Name: { placeInfo.alias }</p>
           { displayphotosList }
         <p>Phone: { placeInfo.display_phone }</p>
         <p>Price: { placeInfo.price }</p>
         <p>Rate: { placeInfo.rating }</p>
-        <img src={ rateImage(placeInfo.rating) }alt='rateImage'></img>
+        <img src={ rateImage(placeInfo.rating) } alt='rateImage'></img>
         <p>Location: { placeAddress[0]} {placeAddress[1]}</p>
         <Reviews data={ this.state.placeReviews } placeInfo={ placeInfo }/>
         <SingleMapContainer data={ this.state.placeInfo }/>

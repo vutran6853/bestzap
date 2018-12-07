@@ -3,8 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { postUserReview, getPlaceReview } from '../../duck/userDataReducer';
 import rateImage from '../image/image';
-import { Container,Row, Col } from 'reactstrap';
-
+import { Container } from 'reactstrap';
 
 class Reviews extends Component {
   constructor(props) {
@@ -25,7 +24,6 @@ class Reviews extends Component {
       this.setState({ reviews: this.props.data.reviews });
       this.postInitReview();
     }, 1000)
-    
   }
 
   //// Post init review to DB from Yelp API
@@ -98,9 +96,7 @@ class Reviews extends Component {
         </Container>
       )
     });
- 
     
-
     return (
       <div>
         <div>

@@ -3,13 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCategoriesList, getLists, getRecommendPLace } from '../../duck/categoriesListReducer';
 import css from './dashboard.scss'
-import { Input, Button, Row, Col, Container, Card, CardImg, 
-        CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-
-
-// import rateStar from '../image/small_1.png';
+import { Input, Button, Row, Col, Container, Card, CardImg } from 'reactstrap';
 import rateImage from '../image/image.js';
-
 
 class Dashboard extends Component {
   constructor(props) {
@@ -140,7 +135,7 @@ class Dashboard extends Component {
       return(
         <a href='#' onClick={ (e) => this.handleSelectCity(e, e.target.name) } 
                     name={ value } 
-                    className='m-2 topCity'>{ value }
+                    className='topCity'>{ value }
         </a>
       )
     })
@@ -167,7 +162,7 @@ class Dashboard extends Component {
       return(
         <a href='#' onClick={ (e) => this.handleSelectCategory(e, e.target.name) } 
                     name={ value } 
-                    className='m-2 topCity'>{ value }
+                    className='topCity'>{ value }
         </a>
       )
     })
@@ -190,7 +185,7 @@ class Dashboard extends Component {
           </Row>
         </Container>
 
-        <div className='text-center' >
+        <div className='browseBox' >
           <p>Browse By Top City</p>
             { displayRecommendCity }
         </div>
@@ -199,7 +194,7 @@ class Dashboard extends Component {
           { displayRecommendList }
         </div>
 
-        <div className='text-center' >
+        <div className='browseBox' >
           <p>Browse Businesses By Category</p>
           <div className='OuterRecommendCategorieBox'>
             { displayRecommendCategorie }

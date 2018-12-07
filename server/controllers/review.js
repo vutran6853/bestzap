@@ -19,6 +19,7 @@ let postInitReview = (req, res, next) => {
 }
 
 let postUserReview = (req, res, next) => {
+
   let datePost = ''
   let dbInstance = req.app.get('db');
 

@@ -69,8 +69,7 @@ class MapContainer extends Component {
                 position={ { lat: `${ coordinates.latitude }`, lng: `${ coordinates.longitude }` } } 
                 onClick={ this.handeleOnMarkerClick }
         />
-      
-        <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+        <InfoWindow marker={ this.state.activeMarker } visible={ this.state.showingInfoWindow }>
             <h3>{ placeName }</h3>
             <h3>{ placeAddress[0]  } { placeAddress[1] }</h3>
         </InfoWindow>

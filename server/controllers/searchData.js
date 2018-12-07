@@ -2,7 +2,6 @@ const axios = require('axios');
 axios.defaults.headers.common['Authorization'] = process.env.REACT_APP_YELP_KEY 
 
 let getCategories = (req, res, next) => {
-  // console.log(req);
   let { userInput } = req.params
   
   axios.get(`https://api.yelp.com/v3/businesses/search?location=austin `)
@@ -65,7 +64,6 @@ let getRecommendPlace = (req, res, next) => {
   .catch((error) => {
     res.status(500).send('Oop, Something have Happen unable to complete this request', error)
   });
-
 }
 
 

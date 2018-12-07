@@ -7,7 +7,6 @@ const GET_PLACEINFO = 'GET_PLACEINFO'
 const GET_PLACEREVIEWS = 'GET_PLACEREVIEWS'
 const GET_RECOMMENDPLACE = 'GET_RECOMMENDPLACE'
 
-
 ////  Initial State
 let initialState = {
   categoriesList: ['Restaurants', 'Shopping', 'Nightlife', 'Food', 'Coffee & Tea', 'Hotels & Travel', 'Real Estate'],

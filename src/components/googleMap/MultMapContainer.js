@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { Link } from 'react-router-dom';
 
 class MultMapContainer extends Component {
   constructor(props) {
@@ -57,8 +56,6 @@ class MultMapContainer extends Component {
     }  
   };
 
-
-
   handleDisplayMarker() {
     let { coordinates, placeName, placeAddress } = this.state;
     
@@ -82,7 +79,7 @@ class MultMapContainer extends Component {
     // console.log('placeAddress', placeAddress);
 
     if(activeMarker === null) {
-
+      return null
     } else {
       return( 
               <InfoWindow marker={ this.state.activeMarker } visible={ this.state.showingInfoWindow }>
@@ -97,10 +94,8 @@ class MultMapContainer extends Component {
 
   render() {
     let { placeName, placeAddress, activeMarker, centerRegion } = this.state;
-    console.log(this.props.google);
+    // console.log(this.props.google);
     return (
-      <div >
-
           <Map  google={ this.props.google }
                 center={ { lat: `${ centerRegion.latitude }`, lng: `${ centerRegion.longitude }` } }
                 zoom={ 10 }
@@ -108,12 +103,8 @@ class MultMapContainer extends Component {
             
           >
             { this.handleDisplayMarker() }
-
             { this.handleDisplayInfo() }
-            
           </Map>
-          </div>
-      
     );
   }
 }

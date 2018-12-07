@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MultMapContainer from '../googleMap/MultMapContainer';
-import { Container, Card, Button, CardImg, Row, Col } from 'reactstrap';
+import { Container, Card, CardImg, Row, Col } from 'reactstrap';
 import rateImage from '../image/image';
 import css from './dashboard.scss';
 
@@ -44,9 +44,7 @@ class ResultDashboard extends Component {
     });
 
     return (
-      <div>
-
-          <Container className='displayListBox mt-2' >
+          <Container id='displayListBox'>
             <Row>
               <Col xs='6'>
                 { displayLists }
@@ -55,19 +53,7 @@ class ResultDashboard extends Component {
                 <MultMapContainer data={ this.state.businessesData } region={ this.state.region } />
               </Row>
             </Row>
-            
-           
-         
-              
-
           </Container>
-
-          <div className='mapBox' >
-
-         
-
-          </div>
-      </div>
     );
   }
 }

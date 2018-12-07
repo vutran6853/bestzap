@@ -6,6 +6,12 @@ $boxpborder: 1px solid blue;
 
 .placeInfoBox {
   border: $boxpborder;
+  .pName {
+    margin-top: 5px;
+    margin-left: 15%;
+    width: 80%;
+    height: 30px;
+  }
 }
 
 .imgBox1 {

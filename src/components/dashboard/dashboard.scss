@@ -8,8 +8,21 @@
   color: black;
   font-size: $font_size;
   font-family: $font_family;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
+.browseBox {
+  margin-left: 30%;
+  width: 40%;
+
+  p {
+    margin-left: 25%;
+  }
+
+
+}
 
 #recommendBox {
   border: $cardBorder;
@@ -30,11 +43,10 @@
 .dashboardBox {
   border: $cardBorder;
   margin: 50px;
-  // background-color: yellowgreen;
 }
 
-.displayListBox {
-  border: $boxborder;
+#displayListBox {
+  border: $cardBorder;
 }
 
 .displayReviewBox {
@@ -73,4 +85,11 @@
 .footerBox {
   background-color: lightblue;
   height: 100px;
+}
+
+@media only screen and (min-width: 1700px) {
+  #recommendBox {
+      margin-right: 50px;
+      margin-left: 200px;
+  }
 }
