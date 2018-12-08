@@ -9,6 +9,9 @@ let navBar = (props) => {
       <Link to='/'>
         <Button outline color='primary' size='sm' id='navbarBtn'>Home</Button>
       </Link>
+      <Link to='/event'>
+        <Button outline color='primary' size='sm' id=''>Event</Button>
+      </Link>
     </Container>
   );
 }

@@ -32,7 +32,6 @@ export function getLists(userInput) {
   }
 }
 
-
 export function getPlaceInfo(id) {
   // console.log(`id ${ id }`);
   return {
@@ -55,7 +54,6 @@ export function getRecommendPLace(location) {
     payload: axios.get(`/api/getRecommendPlace/${ location }`)
   }
 }
-
 
 
 ////  Handle State Changes

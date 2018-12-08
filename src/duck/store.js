@@ -2,11 +2,13 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import categoriesListReducer from './categoriesListReducer';
 import userDataReducer from './userDataReducer';
+import eventDataReducer from './eventReducer';
 
 ////  Use for mult reducers
 const combinedReducers  = combineReducers({
   categoriesList: categoriesListReducer,
-  userData: userDataReducer
+  userData: userDataReducer,
+  eventData: eventDataReducer,
 });
 
 ////  Redux Devtools
