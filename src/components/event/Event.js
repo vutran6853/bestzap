@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getEvent } from '../../duck/eventReducer';
-import { Card, CardTitle, CardText } from 'reactstrap';
+import { Container, Card, CardTitle, CardText } from 'reactstrap';
 import './event.scss';
 const monent = require('moment');
 
@@ -59,11 +59,13 @@ class Event extends Component {
     return (
       <div>
         { diplayEvent }
-    
+        <Container>
         <iframe className='iframeBox' src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amzn_echo_dot_evgrn&banner=0GQJXJBFKHFB5YFH27R2&f=ifr&linkID=593b2eaf9247809f824b6423c34bef60&t=vu09-20&tracking_id=vu09-20" 
                style={ {width:"128", height:"10", scrolling:"no" ,border:"1", marginwidth:"0" , frameborder:"0"}}>
         </iframe>
       
+        </Container>
+        
       </div>
     );
   }
