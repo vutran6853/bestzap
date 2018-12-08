@@ -57,16 +57,12 @@ class Event extends Component {
     });
     
     return (
-      <div>
+      <Container>
         { diplayEvent }
-        <Container>
-        <iframe className='iframeBox' src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amzn_echo_dot_evgrn&banner=0GQJXJBFKHFB5YFH27R2&f=ifr&linkID=593b2eaf9247809f824b6423c34bef60&t=vu09-20&tracking_id=vu09-20" 
-               style={ {width:"128", height:"10", scrolling:"no" ,border:"1", marginwidth:"0" , frameborder:"0"}}>
+        <iframe className='iframeBox' src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=288&l=ur1&category=amzn_echo_dot_evgrn&banner=15VBNW39NDH85MG30202&f=ifr&linkID=65b700645259ab5206ebb2534ceec402&t=vu09-20&tracking_id=vu09-20"  
+             >
         </iframe>
-      
-        </Container>
-        
-      </div>
+      </Container>
     );
   }
 }
