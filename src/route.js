@@ -14,7 +14,6 @@ export default(
       <Route path='/resultDashboard' component={ ResultDashboard }></Route>
       <Route path='/event' component={ Event }></Route>
       <Route path='/eventInfo' component={ EventInfo }></Route>
-
     </Switch>
   </div>
 )
