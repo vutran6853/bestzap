@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import css from './navbar.scss';
 
-let navBar = (props) => {
+let navbar = (props) => {
   return (
     <Container fluid className='navbarBox'>
       <Link to='/'>
         <Button outline color='primary' size='sm' id='navbarBtn'>Home</Button>
       </Link>
       <Link to='/event'>
-        <Button outline color='primary' size='sm' id=''>Event</Button>
+        <Button outline color='primary' size='sm' id=''>Events</Button>
       </Link>
     </Container>
   );
 }
 
-export default navBar;
+export default navbar;
